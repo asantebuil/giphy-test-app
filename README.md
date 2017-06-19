@@ -30,4 +30,4 @@ See the [official documentation](https://github.com/Giphy/GiphyAPI) topics for:
 - [searching for gifs](https://github.com/Giphy/GiphyAPI#search-endpoint) (list of gifs)
 - [viewing a gif by its ID](https://github.com/Giphy/GiphyAPI#get-gif-by-id-endpoint) (details)
 
-<img src="logo_buildtext_white_forever.gif" />
+<img src="logo_buildtext_white_forever.gif" width="300" />
