@@ -22,36 +22,47 @@ export default class Trending extends React.Component {
       //Default giphs are 25 so i sort out 5 rows and 5 columns
       for(var i = 0; i < res.data.data.length; i++){
         let el = res.data.data[i]
-        let obj = {
-          key: i,
-          image: el.images.preview_gif.url,
-          description: el.import_datetime,
-          text: el.slug,
-          obj: el
-        }
-        cols.push(obj)
-        if(i % 5 == 0){
-          rows.push(cols)
-          cols = []
+        console.log(el)
+          try{
+          let obj = {
+            key: i,
+            image: el.images.preview_gif.url,
+            description: el.import_datetime,
+            text: el.slug,
+            obj: el
+          }
+          cols.push(obj)
+          if(i % 5 == 0){
+            rows.push(cols)
+            cols = []
+          }
+        }catch(e){
+          console.log(e)
         }
       }
       this.setState({rows: rows})
+
     })
     .catch(err=>console.log(err))
   }
 
   handleChange = (e, val) =>{
     //Send a simpler object to my store
-    let obj = {
-      image: val.images.original.url,
-      source: val.url,
-      bitly_url: val.bitly_gif_url,
-      date: val.import_datetime,
-      rating: val.rating,
-      slug: val.slug
+    try{
+      let obj = {
+        image: val.images.original.url,
+        source: val.url,
+        bitly_url: val.bitly_gif_url,
+        date: val.import_datetime,
+        rating: val.rating,
+        slug: val.slug
+      }
+      this.props.store.image_info = obj
+      this.props.store.info_visibility = true
+    }catch(e){
+      console.log(e)
     }
-    this.props.store.image_info = obj
-    this.props.store.info_visibility = true
+
   }
 
   render(){

@@ -38,14 +38,18 @@ export default class Search extends React.Component {
         //I sort out the array and create a new array with an obj that keys can be read by the dropdown
         for(var i = 0; i < res.data.data.length; i++){
           let el = res.data.data[i] // el is a variable made to make the sorting less confusing
-          let obj = {
-            key: i,
-            image: el.images.preview_gif.url,
-            description: el.trending_datetime,
-            text: el.slug,
-            obj: res.data.data[i] //I pass the whole object for later reference
+          try{
+            let obj = {
+              key: i,
+              image: el.images.preview_gif.url,
+              description: el.trending_datetime,
+              text: el.slug,
+              obj: res.data.data[i] //I pass the whole object for later reference
+            }
+            new_arr.push(obj)
+          }catch(e){
+            console.log(e)
           }
-          new_arr.push(obj)
         }
         this.setState({results: new_arr}) // arr is saved in state
     })
@@ -62,16 +66,21 @@ export default class Search extends React.Component {
 
   selected = (e, val) =>{
     //I once again create a new object that cleans up confusion and pass it to my store
-    let obj = {
-      image: this.state.results[val.id].obj.images.original.url,
-      source: this.state.results[val.id].obj.url,
-      bitly_url: this.state.results[val.id].obj.bitly_gif_url,
-      date: this.state.results[val.id].obj.import_datetime,
-      rating: this.state.results[val.id].obj.rating,
-      slug: this.state.results[val.id].obj.slug
+    try{
+      let obj = {
+        image: this.state.results[val.id].obj.images.original.url,
+        source: this.state.results[val.id].obj.url,
+        bitly_url: this.state.results[val.id].obj.bitly_gif_url,
+        date: this.state.results[val.id].obj.import_datetime,
+        rating: this.state.results[val.id].obj.rating,
+        slug: this.state.results[val.id].obj.slug
+      }
+      this.props.store.image_info = obj //Store recieves the object
+      this.props.store.info_visibility = true //Visibility for sidepanel changes to true
+    }catch(e){
+      console.log(e)
     }
-    this.props.store.image_info = obj //Store recieves the object
-    this.props.store.info_visibility = true //Visibility for sidepanel changes to true
+
   }
 
   render() {
