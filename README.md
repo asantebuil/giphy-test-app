@@ -4,7 +4,7 @@ Simple Test App using the Giphy Beta API
 ## My README
 My Giphy app is a small single web app that allows users to search with the giphy API and get information from the images. The app uses React.JS, Webpack, React-Router, Semantic UI, and MobX.
 
-To view a live demo you can access it here on my website: [GeekEnforcer](giphy.geekenforcer.com/).
+To view a live demo you can access it here on my website: [GeekEnforcer](http://giphy.geekenforcer.com/)
 
 If you want to build it build it locally run:
 ```shell
