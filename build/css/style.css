@@ -1,0 +1,25 @@
+#root{
+  width: 100vw;
+  height: 100vh;
+}
+.container{
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+.menu-bar{
+  width: 100%;
+  height: 46px;
+}
+.main{
+  width: 60%;
+  margin: 0 auto;
+  top: 46px;
+  bottom: 0;
+  height: calc(100% - 46px);
+}
+.pushable{
+  width: 100%;
+  height: calc(100% - 46px) !important;
+
+}
