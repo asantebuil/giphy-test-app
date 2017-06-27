@@ -14,6 +14,7 @@ export default class Search extends React.Component {
       active: 'Search',
       results: [],
       value: '',
+      display_gif: {},
     }
   }
 
@@ -21,11 +22,32 @@ export default class Search extends React.Component {
     //Function I made to display a random giph on home page
     giphy_random()
     .then((res)=>{
-      this.setState({image: res.data.data.fixed_height_downsampled_url})
+      this.setState({
+        image: res.data.data.fixed_height_downsampled_url,
+        display_gif: res.data.data
+      })
     })
     .catch(err=>console.log(err))
   }
 
+  gifDisplay = () =>{
+    let val = this.state.display_gif
+    try{
+      //Random gif endpoint doesnt give full deta like search does
+      let obj = {
+        image: val.image_original_url,
+        source: val.url,
+        bitly_url: 'N/A',
+        date: 'N/A',
+        rating: 'N/A',
+        slug: val.id
+      }
+      this.props.store.image_info = obj
+      this.props.store.info_visibility = true
+    }catch(e){
+      console.log(e)
+    }
+  }
 
 
   //This function innitiates the search using my giphy API method: giphy_search
@@ -56,6 +78,9 @@ export default class Search extends React.Component {
     .catch((err)=>console.log(err))
   }
 
+  checkKeys = (e) =>{
+    console.log('User input: ',e.key)
+  }
 
   handleChange = (e, value) =>{
     //Invokes search function and passes input value
@@ -80,15 +105,16 @@ export default class Search extends React.Component {
     }catch(e){
       console.log(e)
     }
-
   }
 
   render() {
     return (
-      <div style={{width: '60%', margin:'0 auto' , padding: '40px'}}>
+      <div className='random-image-holder'>
         <Image style={{margin: '0 auto', maxHeight: '40%', maxWidth: '40%'}}
+          href='javascript:void(0)'
           src={this.state.image}
           size='medium'
+          onClick={this.gifDisplay}
         />
         <Dropdown fluid open
           icon={<Icon style={{display: 'none'}}/>}

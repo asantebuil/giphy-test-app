@@ -2,10 +2,11 @@
   width: 100vw;
   height: 100vh;
 }
-.container{
+#container{
   position: relative;
   height: 100vh;
   width: 100vw;
+  outline: none;
 }
 .menu-bar{
   width: 100%;
@@ -21,5 +22,11 @@
 .pushable{
   width: 100%;
   height: calc(100% - 46px) !important;
+}
 
+.random-image-holder{
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px;
 }

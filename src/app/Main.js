@@ -1,27 +1,23 @@
 import  React from 'react'
-
 import {BrowserRouter as Router, Route, Link, NavLink, Redirect} from 'react-router-dom'
-
-import { Input, Menu, Comment, Dropdown, Sidebar, Dimmer, Loader, Button, Grid, Divider, Header, Label, Icon, Image, Popup, Card, Statistic, Modal, Form, Message } from 'semantic-ui-react'
+import { Input, Menu, Dropdown, Sidebar, Button, Divider, Header, Label, Icon, Image } from 'semantic-ui-react'
 import {observer} from 'mobx-react'
 import Search from './Search.js'
 import About from './About.js'
 import Trending from './Trending.js'
+import {KC} from './KC.js'
 import {iSearch, iTwit, iGit} from './Icons.js'
 import {giphy_search, giphy_random} from './GiphyAPI.js'
 
-
-
 @observer
 export default class Home extends React.Component {
-
   constructor(props) {
     super(props)
-
     this.state = {
       active: 'Search',
       results: [],
-      route: '/'
+      route: '/',
+      code: []
     }
   }
   componentWillMount(){
@@ -38,9 +34,15 @@ export default class Home extends React.Component {
     }
   }
 
-
-
-
+  componentDidMount(){
+    $(() => {
+      $('#container').focus();
+    });
+  }
+  checkKeys = (e) =>{
+    let state = KC(e.key, this.state.code)
+    this.setState({code: state.code})
+  }
   render() {
     //RUU is a mutable variable that handles my component Routes
     //When I want to swap routes without reloading the page I copy an instance of RUU and render it
@@ -55,7 +57,9 @@ export default class Home extends React.Component {
       RUU = Search
     }
     return (
-      <div className='container'>
+      <div id='container' tabIndex="1"
+        onKeyDown={this.checkKeys}
+        >
         <div className='menu-bar'>
           <Menu style={{backgroundColor: 'gray'}} pointing secondary>
             <Menu.Item name='Search' active={this.state.active === 'Search'} onClick={() => {this.setState({active: 'Search', route: '/'}); window.history.pushState({}, null, '/')}} />
