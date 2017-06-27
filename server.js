@@ -5,7 +5,7 @@ const favicon = require('serve-favicon')
 
 //To have subdomain routes working correctly, keep this order!//
 
-const router = express.Router() 
+const router = express.Router()
  // API ROUTES //
 router.get('/', (req, res) => {
     res.send('This is a blank API route.');
@@ -24,8 +24,8 @@ app.all('/', (req, res, next)=>{ // For all routes we are passing access control
     res.header('Access-Control-Allow-Headers', 'X-Requested-With')
     next()
 })
-/* 
-    Routes are simply passing the same static html file to the client. 
+/*
+    Routes are simply passing the same static html file to the client.
     In ReactJS we can serve a single html file with multiple routes in the client side
     If you do however want to have multiple html files, point to that file in the directory
 */
@@ -60,8 +60,8 @@ app.get('/500', function(req, res, next){
   // Internal Server Error
   next(new Error('Internal Error!'));
 });
-/* 
-    For each of these app.use you can add different ways to send the client a response about there error 
+/*
+    For each of these app.use you can add different ways to send the client a response about there error
     Typically 404 Pages can have a fun type of look while the other errors can just display the raw error itself
 */
 app.use(function(req, res, next){

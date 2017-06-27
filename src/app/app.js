@@ -1,13 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-
 import store from './mobx/store.js'
-// import Main from './Main.js'
+import Routes from './Routes.js'
 
-import Main from './Main.js'
+injectTapEventPlugin() // Mobile tap compatibility
 
-
-injectTapEventPlugin()
-
-render(<Main store={store}/>, document.getElementById('root'))
+render(<Routes store={store}/>, document.getElementById('root'))
