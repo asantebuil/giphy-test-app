@@ -64,7 +64,7 @@ export default class Search extends React.Component {
             let obj = {
               key: i,
               image: el.images.preview_gif.url,
-              description: el.trending_datetime,
+              description: el.import_datetime,
               text: el.slug,
               obj: res.data.data[i] //I pass the whole object for later reference
             }
